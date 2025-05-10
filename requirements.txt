@@ -9,4 +9,5 @@ Flask-APScheduler==1.13.1
 Flask-Mail==0.10.0
 Flask-Pydantic==0.12.0
 Flask-PyMongo==3.0.1
-stripe===11.5.0
+stripe===11.5.
+gunicorn

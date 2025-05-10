@@ -1,7 +1,7 @@
 import json
 import logging
 from http import HTTPStatus
-import os
+
 from flasgger import Swagger
 
 from controllers.PaymentController import payment_blueprint
@@ -76,7 +76,3 @@ def handle_exception(e: DuplicateKeyError):
 
 # Ajouter la route Stripe
 app.register_blueprint(payment_blueprint, url_prefix='/payment')
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # Utilise 8000 par défaut ou le port d'environnement
-    app.run(host="0.0.0.0", port=port)

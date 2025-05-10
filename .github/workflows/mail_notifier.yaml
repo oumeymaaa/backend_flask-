@@ -1,0 +1,30 @@
+name: Notify on Branch Push
+
+on:
+  push:
+    branches-ignore:
+      - main  # Exclude the main branch
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Code Pushed to ${{ github.ref }}"
+          to: ${{ secrets.EMAIL_RECEPIENT }}
+          from: "Your CI/CD System"
+          body: |
+            A push was made to the branch: ${{ github.ref }}
+            Repository: ${{ github.repository }}
+            Committer: ${{ github.actor }}
+            Latest Commit: ${{ github.event.head_commit.message }}
